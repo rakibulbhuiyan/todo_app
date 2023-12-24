@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task List</title>
+</head>
+<body>
+    <h1>Task List</h1>
+    <hr>
+    {% if request.user.is_authenticated %}
+        <p>UserName :{{request.user}}</p>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
+    {% else %}
+         <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+    <hr>
+    
+    <form action="" method='GET'>
+    
+        <input type="text" name='search_value' value={{search_input}}>
+        <input type="submit" value='search'>
+    </form>
+
+
+    {% if tasks %}
+    <table border="1">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Complete</th>
+                <th>Created</th>
+                <th>Details View</th>
+                <th>Update or Edit Task</th>
+            </tr>
+        </thead>
+        <tbody>
+        
+            {% for task in tasks %}
+                <tr>
+                    <td>{{ task.user }}</td>
+                    <td>{{ task.title }}</td>
+                    <td>{{ task.description }}</td>
+                    <td>{{ task.complete }}</td>
+                    <td>{{ task.created }}</td>
+                    <td><a href="{% url 'taskdetail' task.id %}">View</a></td>
+                    <td><a href="{% url 'Taskupdate' task.id %}">Edit</a></td>
+                    <td><a href="{% url 'Taskdelete' task.id %}">Delete</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+            <h3>No task Here</h3>
+    {% endif %}
+    <p>Want to create new Task  <a href="{% url 'taskcreate' %}">Click Here</a></p>
+
+</body>
+</html>

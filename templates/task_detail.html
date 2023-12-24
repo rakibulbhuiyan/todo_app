@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Detail</title>
+</head>
+<body>
+    <h1>Task Detail</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Complete</th>
+                <th>Created</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ tasks.user }}</td>
+                <td>{{ tasks.title }}</td>
+                <td>{{ tasks.description }}</td>
+                <td>{{ tasks.complete }}</td>
+                <td>{{ tasks.created }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="{% url 'tasklist' %}">back</a>
+</body>
+</html>
